@@ -4,5 +4,8 @@ module DbFetcher
 
     def define_steps
     end
+
+    def run
+    end
   end
 end
