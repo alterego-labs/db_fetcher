@@ -13,5 +13,7 @@ class DbFetcher::StepBuilderTest < Minitest::Test
   def test_populating_steps
     @builder.step
     assert_equal @builder.steps.count, 1
+    step = @builder.steps.first
+    assert_kind_of DbFetcher::StepDefinitions::Basic, step
   end
 end

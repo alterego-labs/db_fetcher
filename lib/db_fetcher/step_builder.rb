@@ -7,7 +7,7 @@ module DbFetcher
     end
 
     def step
-      @steps << 'some_step_instance'
+      @steps << DbFetcher::StepDefinitions::Basic.new
     end
   end
 end
