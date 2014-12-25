@@ -17,7 +17,7 @@ class DbFetcher::RunnerTest < Minitest::Test
 
   def test_defining_steps
     @runner.define_steps do
-      step
+      step some_feet: {}
     end
     assert_equal @runner.steps.count, 1
   end

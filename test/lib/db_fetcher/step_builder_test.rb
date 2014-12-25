@@ -10,10 +10,10 @@ class DbFetcher::StepBuilderTest < Minitest::Test
     assert_respond_to @builder, :steps
   end
 
-  def test_populating_steps
-    @builder.step
+  def test_define_step_with_hash
+    @builder.step some_feet: { command: 'test' }
     assert_equal @builder.steps.count, 1
     step = @builder.steps.first
-    assert_kind_of DbFetcher::StepDefinitions::Basic, step
+    assert_kind_of DbFetcher::StepDefinitions::SomeFeet, step
   end
 end
