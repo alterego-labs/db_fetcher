@@ -13,7 +13,7 @@ class DbFetcher::ContextRegisterTest < Minitest::Test
     DbFetcher::ContextRegister.add :local
     contexts = DbFetcher::ContextRegister.contexts_instances
     assert_equal contexts.count, 1
-    assert_kind_of DbFetcher::Runtime::LocalContext, contexts.first
+    assert_kind_of DbFetcher::Runtime::LocalContext, contexts[:local]
     DbFetcher::ContextRegister.clear
   end
 end

@@ -13,7 +13,7 @@ module DbFetcher
       end
 
       def contexts_instances
-        @contexts.map { |code| ContextInitializer.new(code).create }
+        @contexts.inject({}) { |hash, code| hash[code] = ContextInitializer.new(code).create; hash }
       end
 
       def clear
