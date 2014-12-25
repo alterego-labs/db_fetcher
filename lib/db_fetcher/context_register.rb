@@ -12,8 +12,14 @@ module DbFetcher
         @contexts << code
       end
 
+      def get(code)
+        contexts_instances[code]
+      end
+
       def contexts_instances
-        @contexts.inject({}) { |hash, code| hash[code] = ContextInitializer.new(code).create; hash }
+        @_contexts_instances ||= @contexts.inject({}) do |hash, code|
+          hash[code] = ContextInitializer.new(code).create; hash
+        end
       end
 
       def clear
