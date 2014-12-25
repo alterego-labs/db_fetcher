@@ -7,7 +7,7 @@ module DbFetcher
         @options = options
       end
 
-      def run
+      def run(context)
       end
     end
   end
