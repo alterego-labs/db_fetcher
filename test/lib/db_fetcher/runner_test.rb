@@ -21,4 +21,14 @@ class DbFetcher::RunnerTest < Minitest::Test
     end
     assert_equal @runner.steps.count, 1
   end
+
+  def test_proper_running
+    @runner.define_steps do
+      step local_run: { command: 'some' }
+    end
+
+    DbFetcher::StepDefinitions::LocalRun.any_instance.expects(:run)
+
+    @runner.run
+  end
 end
