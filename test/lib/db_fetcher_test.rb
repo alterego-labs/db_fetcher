@@ -1,9 +1,22 @@
 require_relative '../test_helper'
 
 class DbFetcherTest < Minitest::Test
-  def test_registering_attribute
-    DbFetcher.register_context :ssh
-    assert DbFetcher.contexts.include?(:ssh)
+  def setup
+    DbFetcher.logger = nil
+  end
+
+  def test_responsebilities
+    assert_respond_to DbFetcher, :logger
+    assert_respond_to DbFetcher, :define_runner
+  end
+
+  def test_fetching_logger_by_default
+    assert_kind_of DbFetcher::Logging::Console, DbFetcher.logger
+  end
+
+  def test_fetching_setted_logger
+    DbFetcher.logger = :my_logger
+    assert_equal :my_logger, DbFetcher.logger
   end
 
   def test_define_new_runner

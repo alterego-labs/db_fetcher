@@ -1,15 +1,11 @@
 module DbFetcher
   extend self
 
-  attr_reader :contexts
+  attr_accessor :logger
 
-  def contexts
-    @contexts || []
-  end
-
-  def register_context(code)
-    @contexts ||= []
-    @contexts << code
+  def logger
+    @logger = @logger || Logging::Console.new
+    @logger
   end
 
   def define_runner(&block)
