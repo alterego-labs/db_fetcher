@@ -7,6 +7,7 @@ module DbFetcher
       end
 
       def run(context)
+        DbFetcher.logger.step_start 'SshRun'
         context.run_command command
       end
 

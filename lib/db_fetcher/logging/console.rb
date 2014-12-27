@@ -6,7 +6,7 @@ module DbFetcher
       end
 
       def command_start(command)
-        write "  * executing #{command}", :yellow
+        write "  * executing `#{command}`", :yellow
       end
 
       def answer_start(server)

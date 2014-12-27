@@ -5,6 +5,7 @@ class DbFetcher::Runtime::SshContextTest < Minitest::Test
     @ssh_context = DbFetcher::Runtime::SshContext.new
     @ssh = mock()
     @ssh_context.stubs(:ssh).returns @ssh
+    @ssh.stubs(:host).returns 'some.com'
   end
 
   def test_success_loggining
