@@ -7,7 +7,7 @@ class DbFetcher::Logging::ConsoleTest < Minitest::Test
   end
 
   def test_responsebilities
-    %w[write step_start].each do |method|
+    %w[write step_start command_start].each do |method|
       assert_respond_to @logger, method
     end
   end
@@ -26,5 +26,10 @@ class DbFetcher::Logging::ConsoleTest < Minitest::Test
   def test_step_start
     @logger.expects(:write)
     @logger.step_start :local_run
+  end
+
+  def test_command_start
+    @logger.expects(:write)
+    @logger.command_start 'some'
   end
 end
