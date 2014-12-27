@@ -2,8 +2,8 @@ Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each do |file|
   require file
 end
 
-host = 'tiporbet.com'
-username = 'root'
+host = 'YOUR_HOST'
+username = 'YOUR_USERNAME'
 
 ssh_runner = DbFetcher.define_runner do
   step ssh_login: { host: host, username: username }
