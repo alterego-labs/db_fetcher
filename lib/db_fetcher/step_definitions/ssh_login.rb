@@ -7,6 +7,7 @@ module DbFetcher
       end
 
       def run(context)
+        DbFetcher.logger.step_start 'SshLogin'
         context.login host, username
       end
 
