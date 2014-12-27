@@ -6,6 +6,7 @@ module DbFetcher
       end
 
       def write(message, color = :white)
+        return if silently?
         puts message.send(color)
       end
 
