@@ -5,6 +5,10 @@ class DbFetcherTest < Minitest::Test
     DbFetcher.logger = nil
   end
 
+  def teardown
+    DbFetcher.logger = DbFetcher::Logging::Console.new silent: true
+  end
+
   def test_responsebilities
     assert_respond_to DbFetcher, :logger
     assert_respond_to DbFetcher, :define_runner
