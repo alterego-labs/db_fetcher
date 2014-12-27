@@ -11,3 +11,12 @@ module DbFetcher
     end
   end
 end
+
+module DbFetcher
+  module Runtime
+    class SomeContext
+    end
+  end
+end
+
+DbFetcher.logger = DbFetcher::Logging::Console.new silent: true
