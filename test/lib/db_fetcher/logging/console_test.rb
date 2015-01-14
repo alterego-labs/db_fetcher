@@ -32,4 +32,9 @@ class DbFetcher::Logging::ConsoleTest < Minitest::Test
     @logger.expects(:write)
     @logger.command_start 'some'
   end
+
+  def test_upload_progress
+    @logger.expects(:write).with "    uploading: 1% completed"
+    @logger.upload_progress 1
+  end
 end

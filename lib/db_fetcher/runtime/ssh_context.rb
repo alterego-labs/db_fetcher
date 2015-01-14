@@ -1,4 +1,5 @@
 require 'net/ssh'
+require 'net/scp'
 require 'forwardable'
 
 module DbFetcher
@@ -30,6 +31,17 @@ module DbFetcher
         DbFetcher.logger.answer_start host
         result = ssh.exec! command
         DbFetcher.logger.answer_body result
+        DbFetcher.logger.command_finished
+      end
+
+      def upload(remote_path, local_path)
+        raise 'Must be logged in first!' unless active?
+        DbFetcher.logger.command_start "Uploading remote #{remote_path} to local #{local_path}"
+        DbFetcher.logger.answer_start host
+        ssh.scp.upload!(remote_path, local_path) do |ch, name, sent, total|
+          percent = (sent.to_f * 100 / total.to_f).to_i
+          DbFetcher.logger.upload_progress percent
+        end
         DbFetcher.logger.command_finished
       end
 

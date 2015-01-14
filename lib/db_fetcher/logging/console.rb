@@ -21,6 +21,10 @@ module DbFetcher
         write "    finished on #{formatted_now}"
       end
 
+      def upload_progress(percent)
+        write "    uploading: #{percent}% completed"
+      end
+
       def write(message, color = :white)
         return if silently?
         puts message.send(color)
