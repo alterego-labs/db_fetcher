@@ -57,18 +57,18 @@ class DbFetcher::Runtime::SshContextTest < Minitest::Test
     assert_equal false, @ssh_context.active?
   end
 
-  def test_running_uploading
+  def test_running_downloading
     @ssh_context.expects(:active?).returns true
     scp = mock()
     @ssh.expects(:scp).returns scp
-    scp.expects(:upload!).with(:remote_path, :local_path)
-    @ssh_context.upload :remote_path, :local_path
+    scp.expects(:download!).with(:remote_path, :local_path)
+    @ssh_context.download :remote_path, :local_path
   end
 
-  def test_uploading_raise_error_if_not_active
+  def test_downloading_raise_error_if_not_active
     @ssh_context.expects(:active?).returns false
     assert_raises RuntimeError do
-      @ssh_context.upload :remote, :local
+      @ssh_context.download :remote, :local
     end
   end
 end

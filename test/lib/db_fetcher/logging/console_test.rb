@@ -33,8 +33,19 @@ class DbFetcher::Logging::ConsoleTest < Minitest::Test
     @logger.command_start 'some'
   end
 
-  def test_upload_progress
-    @logger.expects(:write).with "    uploading: 1% completed"
-    @logger.upload_progress 1
+  def test_updown_progress
+    @logger.expects(:write_with_back).with "    progress: 1% completed"
+    @logger.updown_progress 1
+  end
+
+  def test_write_with_back_successfully
+    @logger.expects(:print).twice
+    @logger.write_with_back 'some'
+  end
+
+  def test_write_with_back_failure_when_silence
+    @logger.stubs(:silently?).returns true
+    @logger.expects(:print).never
+    @logger.write_with_back 'some'
   end
 end

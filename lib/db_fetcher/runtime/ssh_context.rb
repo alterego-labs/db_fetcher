@@ -34,13 +34,13 @@ module DbFetcher
         DbFetcher.logger.command_finished
       end
 
-      def upload(remote_path, local_path)
+      def download(remote_path, local_path)
         raise 'Must be logged in first!' unless active?
-        DbFetcher.logger.command_start "Uploading remote #{remote_path} to local #{local_path}"
+        DbFetcher.logger.command_start "Downloading remote #{remote_path} to local #{local_path}"
         DbFetcher.logger.answer_start host
-        ssh.scp.upload!(remote_path, local_path) do |ch, name, sent, total|
-          percent = (sent.to_f * 100 / total.to_f).to_i
-          DbFetcher.logger.upload_progress percent
+        ssh.scp.download!(remote_path, local_path) do |ch, name, sent, total|
+          percent = (sent.to_f * 100 / total.to_f).round 2
+          DbFetcher.logger.updown_progress percent
         end
         DbFetcher.logger.command_finished
       end

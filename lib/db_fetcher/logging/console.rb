@@ -21,13 +21,19 @@ module DbFetcher
         write "    finished on #{formatted_now}"
       end
 
-      def upload_progress(percent)
-        write "    uploading: #{percent}% completed"
+      def updown_progress(percent)
+        write_with_back "    progress: #{percent}% completed"
       end
 
       def write(message, color = :white)
         return if silently?
         puts message.send(color)
+      end
+
+      def write_with_back(message, color = :white)
+        return if silently?
+        print message.send(color)
+        print 13.chr
       end
 
       private

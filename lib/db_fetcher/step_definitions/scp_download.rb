@@ -1,14 +1,14 @@
 module DbFetcher
   module StepDefinitions
-    class ScpUpload < Basic
+    class ScpDownload < Basic
       def initialize(options = {})
         @target_context = :ssh
         super
       end
 
       def run(context)
-        DbFetcher.logger.step_start 'ScpUpload'
-        context.upload remote, local
+        DbFetcher.logger.step_start 'ScpDownload'
+        context.download remote, local
       end
 
       private
